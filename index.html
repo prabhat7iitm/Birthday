@@ -3,61 +3,131 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Reshmi 💖</title>
+  <title>Happy Birthday Reshmi 🎂💕</title>
   <style>
     body {
       margin: 0;
-      background: linear-gradient(135deg, #ffb6c1, #ff69b4, #ff1493);
+      background: radial-gradient(circle at top, #ffb6c1, #ff69b4, #ff1493);
       color: #fff;
       font-family: 'Comic Sans MS', cursive;
       text-align: center;
       overflow: hidden;
     }
+
     h1 {
       margin-top: 50px;
       font-size: 3em;
-      text-shadow: 2px 2px 4px #00000055;
+      text-shadow: 2px 2px 5px #00000066;
     }
+
     p {
       font-size: 1.3em;
     }
-    .heart {
+
+    /* Cake base */
+    .cake {
+      position: relative;
+      width: 200px;
+      height: 100px;
+      background: #8b4513;
+      margin: 100px auto;
+      border-radius: 0 0 20px 20px;
+      display: none;
+    }
+
+    .icing {
       position: absolute;
-      width: 40px;
+      top: -30px;
+      width: 200px;
       height: 40px;
+      background: #fff0f5;
+      border-radius: 20px 20px 0 0;
+      display: none;
+    }
+
+    .decor {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+    }
+
+    .decor .heart {
+      width: 20px;
+      height: 20px;
       background: red;
       transform: rotate(-45deg);
-      animation: float 6s infinite ease-in;
-      cursor: pointer;
+      display: inline-block;
+      margin: 0 5px;
+      position: relative;
     }
-    .heart::before, .heart::after {
-      content: "";
+    .decor .heart::before,
+    .decor .heart::after {
+      content: '';
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 20px;
+      height: 20px;
       background: red;
       border-radius: 50%;
     }
-    .heart::before { top: -20px; left: 0; }
-    .heart::after { left: 20px; top: 0; }
+    .decor .heart::before { top: -10px; left: 0; }
+    .decor .heart::after { top: 0; left: 10px; }
+
+    /* Candles */
+    .candles {
+      position: absolute;
+      top: -60px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      display: none;
+    }
+    .candle {
+      width: 10px;
+      height: 40px;
+      background: #ffdead;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .flame {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 15px;
+      background: gold;
+      border-radius: 50%;
+      animation: flicker 0.3s infinite alternate;
+      display: none;
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1); opacity: 1; }
+      to { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+    }
+
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 50px;
+      border-radius: 50%;
+      background: red;
+      opacity: 0;
+      animation: float 6s ease-in infinite;
+    }
 
     @keyframes float {
-      0% { transform: translateY(100vh) rotate(-45deg) scale(1); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(-45deg) scale(0.8); opacity: 0; }
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-20vh); opacity: 0; }
     }
 
-    #message {
-      display: none;
-      font-size: 1.6em;
-      margin-top: 40px;
-      animation: pop 0.6s ease-out;
-    }
-
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
+    /* Confetti */
     #confetti {
       position: fixed;
       width: 100%;
@@ -66,38 +136,81 @@
       top: 0;
       left: 0;
     }
+
+    /* Message */
+    #message {
+      display: none;
+      font-size: 1.6em;
+      margin-top: 40px;
+      animation: pop 1s ease-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Music button */
+    #musicBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      color: #ff1493;
+      border: none;
+      border-radius: 50%;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
   </style>
 </head>
 <body>
   <canvas id="confetti"></canvas>
-  <h1>🎂 Happy Birthday, Reshmi! 💕</h1>
-  <p>Click on a heart to unlock your surprise!</p>
-  <div id="message">💌 You’re the sparkle in my chaos, the calm in my caffeine.  
-  Love you tons, Reshmi 😘💖</div>
+  <h1>🎉 Happy Birthday Reshmi 💕</h1>
+  <p>Click anywhere to start the surprise!</p>
+
+  <div class="cake" id="cake">
+    <div class="icing" id="icing"></div>
+    <div class="decor" id="decor">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+    </div>
+    <div class="candles" id="candles">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+    </div>
+  </div>
+
+  <div id="message">
+    💌 You’re the frosting to my cake, the light to my candle,  
+    and the cutest reason I smile every day! 😘💖
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="music/song.mp3" type="audio/mpeg">
+  </audio>
+  <button id="musicBtn">🎵</button>
 
   <script>
-    // Floating hearts generator
-    for (let i = 0; i < 12; i++) {
-      let heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 3 + Math.random() * 5 + 's';
-      document.body.appendChild(heart);
-
-      heart.addEventListener('click', () => {
-        heart.remove();
-        triggerConfetti();
-        document.getElementById('message').style.display = 'block';
-      });
-    }
-
-    // Simple confetti animation
+    let clickCount = 0;
+    const cake = document.getElementById('cake');
+    const icing = document.getElementById('icing');
+    const decor = document.getElementById('decor');
+    const candles = document.getElementById('candles');
+    const flames = document.querySelectorAll('.flame');
+    const message = document.getElementById('message');
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
     const confettiCanvas = document.getElementById('confetti');
     const ctx = confettiCanvas.getContext('2d');
     confettiCanvas.width = window.innerWidth;
     confettiCanvas.height = window.innerHeight;
-
     const confettiPieces = [];
+
     function randomColor() {
       const colors = ['#ff0', '#0ff', '#f0f', '#fff', '#ff6347'];
       return colors[Math.floor(Math.random() * colors.length)];
@@ -111,8 +224,7 @@
           w: 6,
           h: 10,
           color: randomColor(),
-          speed: Math.random() * 3 + 2,
-          angle: Math.random() * 360
+          speed: Math.random() * 3 + 2
         });
       }
     }
@@ -128,6 +240,58 @@
       requestAnimationFrame(drawConfetti);
     }
     drawConfetti();
+
+    // Music toggle
+    let playing = false;
+    musicBtn.addEventListener('click', () => {
+      if (playing) {
+        music.pause();
+        musicBtn.textContent = '🎵';
+      } else {
+        music.play();
+        musicBtn.textContent = '🔇';
+      }
+      playing = !playing;
+    });
+
+    // Main click interaction
+    document.body.addEventListener('click', () => {
+      clickCount++;
+
+      if (clickCount === 1) {
+        cake.style.display = 'block';
+      } 
+      else if (clickCount === 2) {
+        icing.style.display = 'block';
+        decor.style.display = 'block';
+      } 
+      else if (clickCount === 3) {
+        candles.style.display = 'flex';
+        flames.forEach(f => f.style.display = 'block');
+        triggerConfetti();
+        spawnBalloons();
+        message.style.display = 'block';
+        music.play();
+        musicBtn.textContent = '🔇';
+        playing = true;
+      }
+    });
+
+    // Balloons
+    function spawnBalloons() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff69b4'];
+      for (let i = 0; i < 10; i++) {
+        let balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDuration = 4 + Math.random() * 3 + 's';
+        balloon.style.opacity = 1;
+        document.body.appendChild(balloon);
+
+        setTimeout(() => balloon.remove(), 7000);
+      }
+    }
   </script>
 </body>
 </html>
