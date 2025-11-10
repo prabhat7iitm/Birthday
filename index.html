@@ -6,12 +6,29 @@
   <title>Happy Birthday Reshmi 🎂</title>
   <style>
     body {
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background: radial-gradient(circle at top left, #ffe6f2, #ffb6c1, #fcbad3);
       text-align: center;
       font-family: "Comic Sans MS", cursive;
       overflow: hidden;
       height: 100vh;
       margin: 0;
+      position: relative;
+    }
+
+    /* ✨ soft floating confetti */
+    .confetti {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: white;
+      opacity: 0.7;
+      border-radius: 50%;
+      animation: confettiFall 8s linear infinite;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
 
     h1 {
@@ -30,7 +47,7 @@
     #cake {
       display: none;
       position: absolute;
-      bottom: 100px;
+      bottom: 120px;
       left: 50%;
       transform: translateX(-50%);
     }
@@ -81,7 +98,7 @@
       width: 10px;
       height: 15px;
       background: orange;
-      border-radius: 50% 50% 50% 50%;
+      border-radius: 50%;
       position: absolute;
       top: -15px;
       left: 1px;
@@ -159,6 +176,16 @@
   <audio id="music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0070dbcfb1.mp3?filename=birthday-song-11267.mp3"></audio>
 
   <script>
+    // 🌈 Add floating confetti
+    for (let i = 0; i < 50; i++) {
+      let conf = document.createElement('div');
+      conf.className = 'confetti';
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.animationDuration = 5 + Math.random() * 5 + 's';
+      conf.style.background = ['#fff', '#ffe4e1', '#ffd1dc', '#fce1ff'][i % 4];
+      document.body.appendChild(conf);
+    }
+
     let step = 0;
     const button = document.getElementById('startButton');
     const cake = document.getElementById('cake');
@@ -174,7 +201,6 @@
         button.textContent = "Decorate the Cake 🎂";
       } 
       else if (step === 2) {
-        // add decorations on cake
         for (let i = 0; i < 12; i++) {
           let d = document.createElement('div');
           d.className = 'decoration';
@@ -185,7 +211,6 @@
         button.textContent = "Light the Candle 🕯️";
       } 
       else if (step === 3) {
-        // add candle
         const candle = document.createElement('div');
         candle.className = 'candle';
         const flame = document.createElement('div');
@@ -193,7 +218,6 @@
         candle.appendChild(flame);
         cakeBody.appendChild(candle);
 
-        // create balloons
         for (let i = 0; i < 10; i++) {
           let b = document.createElement('div');
           b.className = 'balloon';
@@ -203,11 +227,11 @@
           balloons.appendChild(b);
         }
 
-        // play music + show message
         music.play();
         message.style.display = 'block';
-        button.textContent = "🎈 Replay Surprise";
-        step = 0; // reset for replay
+
+        // Hide button after candle lights up 🎂
+        button.style.display = 'none';
       }
     });
   </script>
