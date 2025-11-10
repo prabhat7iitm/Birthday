@@ -3,295 +3,200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Reshmi 🎂💕</title>
+  <title>Happy Birthday Reshmi 🎂</title>
   <style>
     body {
-      margin: 0;
-      background: radial-gradient(circle at top, #ffb6c1, #ff69b4, #ff1493);
-      color: #fff;
-      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       text-align: center;
+      font-family: "Comic Sans MS", cursive;
       overflow: hidden;
+      height: 100vh;
+      margin: 0;
     }
 
     h1 {
-      margin-top: 50px;
-      font-size: 3em;
-      text-shadow: 2px 2px 5px #00000066;
+      margin-top: 30px;
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 2px 2px 4px #ff4081;
     }
 
-    p {
-      font-size: 1.3em;
-    }
-
-    /* Cake base */
-    .cake {
-      position: relative;
-      width: 200px;
-      height: 100px;
-      background: #8b4513;
-      margin: 100px auto;
-      border-radius: 0 0 20px 20px;
+    #cake, #decor, #candles, #balloons {
       display: none;
+      margin: 20px auto;
+      position: relative;
     }
 
-    .icing {
+    .cake {
+      width: 200px;
+      height: 120px;
+      background: #ffb6c1;
+      border-radius: 10px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .cake::before {
+      content: "";
       position: absolute;
       top: -30px;
-      width: 200px;
-      height: 40px;
-      background: #fff0f5;
-      border-radius: 20px 20px 0 0;
-      display: none;
+      left: 20px;
+      width: 160px;
+      height: 30px;
+      background: #ff69b4;
+      border-radius: 10px 10px 0 0;
     }
 
-    .decor {
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: none;
-    }
-
-    .decor .heart {
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(-45deg);
-      display: inline-block;
-      margin: 0 5px;
-      position: relative;
-    }
-    .decor .heart::before,
-    .decor .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
+    .decoration {
+      width: 10px;
+      height: 10px;
+      background: #fff;
       border-radius: 50%;
-    }
-    .decor .heart::before { top: -10px; left: 0; }
-    .decor .heart::after { top: 0; left: 10px; }
-
-    /* Candles */
-    .candles {
       position: absolute;
-      top: -60px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      display: none;
+      animation: twinkle 1s infinite alternate;
     }
+
+    @keyframes twinkle {
+      from { transform: scale(0.8); opacity: 0.7; }
+      to { transform: scale(1.2); opacity: 1; }
+    }
+
     .candle {
       width: 10px;
       height: 40px;
-      background: #ffdead;
-      border-radius: 2px;
-      position: relative;
+      background: #fff;
+      position: absolute;
+      top: -40px;
+      left: 95px;
     }
 
     .flame {
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
       width: 10px;
       height: 15px;
-      background: gold;
+      background: orange;
       border-radius: 50%;
-      animation: flicker 0.3s infinite alternate;
-      display: none;
+      position: absolute;
+      top: -15px;
+      left: 0;
+      animation: flicker 0.2s infinite alternate;
     }
 
     @keyframes flicker {
-      from { transform: translateX(-50%) scale(1); opacity: 1; }
-      to { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+      from { transform: scaleY(1); opacity: 0.8; }
+      to { transform: scaleY(1.2); opacity: 1; }
     }
 
-    /* Balloons */
     .balloon {
-      position: absolute;
-      width: 40px;
-      height: 50px;
-      border-radius: 50%;
+      width: 50px;
+      height: 60px;
       background: red;
-      opacity: 0;
-      animation: float 6s ease-in infinite;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -100px;
+      animation: float 5s ease-in infinite;
     }
 
     @keyframes float {
-      0% { transform: translateY(100vh); opacity: 1; }
-      100% { transform: translateY(-20vh); opacity: 0; }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-800px); opacity: 0; }
     }
 
-    /* Confetti */
-    #confetti {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      top: 0;
-      left: 0;
+    #startButton {
+      background-color: #ff4081;
+      color: white;
+      font-size: 1.2em;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
     }
 
-    /* Message */
+    #startButton:hover {
+      transform: scale(1.1);
+    }
+
     #message {
       display: none;
-      font-size: 1.6em;
-      margin-top: 40px;
-      animation: pop 1s ease-out;
+      font-size: 1.8em;
+      color: #fff;
+      text-shadow: 2px 2px 4px #ff4081;
+      margin-top: 20px;
+      animation: fadeIn 2s forwards;
     }
 
-    @keyframes pop {
-      0% { transform: scale(0.5); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* Music button */
-    #musicBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #fff;
-      color: #ff1493;
-      border: none;
-      border-radius: 50%;
-      padding: 15px;
-      cursor: pointer;
-      font-size: 20px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
-  <h1>🎉 Happy Birthday Reshmi 💕</h1>
-  <p>Click anywhere to start the surprise!</p>
+  <h1>🎉 Happy Birthday, Reshmi! 🎂</h1>
 
-  <div class="cake" id="cake">
-    <div class="icing" id="icing"></div>
-    <div class="decor" id="decor">
-      <div class="heart"></div>
-      <div class="heart"></div>
-      <div class="heart"></div>
-    </div>
-    <div class="candles" id="candles">
-      <div class="candle"><div class="flame"></div></div>
-      <div class="candle"><div class="flame"></div></div>
-      <div class="candle"><div class="flame"></div></div>
-    </div>
+  <button id="startButton">Click for the Surprise 🎁</button>
+
+  <div id="cake">
+    <div class="cake"></div>
   </div>
 
-  <div id="message">
-    💌 You’re the frosting to my cake, the light to my candle,  
-    and the cutest reason I smile every day! 😘💖
-  </div>
+  <div id="decor"></div>
+  <div id="candles"></div>
+  <div id="balloons"></div>
+  <div id="message">💖 You light up my world, Reshmi 💖</div>
 
-  <audio id="bgMusic" loop>
-    <source src="music/song.mp3" type="audio/mpeg">
-  </audio>
-  <button id="musicBtn">🎵</button>
+  <audio id="music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0070dbcfb1.mp3?filename=birthday-song-11267.mp3"></audio>
 
   <script>
-    let clickCount = 0;
+    let step = 0;
+    const button = document.getElementById('startButton');
     const cake = document.getElementById('cake');
-    const icing = document.getElementById('icing');
     const decor = document.getElementById('decor');
     const candles = document.getElementById('candles');
-    const flames = document.querySelectorAll('.flame');
+    const balloons = document.getElementById('balloons');
     const message = document.getElementById('message');
-    const music = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    const confettiCanvas = document.getElementById('confetti');
-    const ctx = confettiCanvas.getContext('2d');
-    confettiCanvas.width = window.innerWidth;
-    confettiCanvas.height = window.innerHeight;
-    const confettiPieces = [];
+    const music = document.getElementById('music');
 
-    function randomColor() {
-      const colors = ['#ff0', '#0ff', '#f0f', '#fff', '#ff6347'];
-      return colors[Math.floor(Math.random() * colors.length)];
-    }
-
-    function triggerConfetti() {
-      for (let i = 0; i < 80; i++) {
-        confettiPieces.push({
-          x: Math.random() * confettiCanvas.width,
-          y: Math.random() * confettiCanvas.height,
-          w: 6,
-          h: 10,
-          color: randomColor(),
-          speed: Math.random() * 3 + 2
-        });
-      }
-    }
-
-    function drawConfetti() {
-      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-      confettiPieces.forEach((p) => {
-        ctx.fillStyle = p.color;
-        ctx.fillRect(p.x, p.y, p.w, p.h);
-        p.y += p.speed;
-        if (p.y > confettiCanvas.height) p.y = 0;
-      });
-      requestAnimationFrame(drawConfetti);
-    }
-    drawConfetti();
-
-    // Music toggle
-    let playing = false;
-    musicBtn.addEventListener('click', () => {
-      if (playing) {
-        music.pause();
-        musicBtn.textContent = '🎵';
-      } else {
-        music.play();
-        musicBtn.textContent = '🔇';
-      }
-      playing = !playing;
-    });
-
-    // Main click interaction
-    document.body.addEventListener('click', () => {
-      clickCount++;
-
-      if (clickCount === 1) {
+    button.addEventListener('click', () => {
+      step++;
+      if (step === 1) {
         cake.style.display = 'block';
-      } 
-      else if (clickCount === 2) {
-        icing.style.display = 'block';
+        button.textContent = "Decorate the Cake 🎂";
+      } else if (step === 2) {
         decor.style.display = 'block';
-      } 
-      else if (clickCount === 3) {
-        candles.style.display = 'flex';
-        flames.forEach(f => f.style.display = 'block');
-        triggerConfetti();
-        spawnBalloons();
-        message.style.display = 'block';
+        for (let i = 0; i < 10; i++) {
+          let d = document.createElement('div');
+          d.className = 'decoration';
+          d.style.left = (100 + i*10) + 'px';
+          d.style.top = (200 + Math.random()*30) + 'px';
+          decor.appendChild(d);
+        }
+        button.textContent = "Light the Candles 🕯️";
+      } else if (step === 3) {
+        candles.style.display = 'block';
+        let candle = document.createElement('div');
+        candle.className = 'candle';
+        let flame = document.createElement('div');
+        flame.className = 'flame';
+        candle.appendChild(flame);
+        cake.appendChild(candle);
+
+        for (let i = 0; i < 10; i++) {
+          let b = document.createElement('div');
+          b.className = 'balloon';
+          b.style.left = (50 * i) + 'px';
+          b.style.background = ['red','blue','yellow','green','pink'][i % 5];
+          balloons.appendChild(b);
+        }
+
         music.play();
-        musicBtn.textContent = '🔇';
-        playing = true;
+        message.style.display = 'block';
+        button.textContent = "🎈 Replay Surprise";
+        step = 0; // reset for replay
       }
     });
-
-    // Balloons
-    function spawnBalloons() {
-      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff69b4'];
-      for (let i = 0; i < 10; i++) {
-        let balloon = document.createElement('div');
-        balloon.classList.add('balloon');
-        balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
-        balloon.style.left = Math.random() * 100 + 'vw';
-        balloon.style.animationDuration = 4 + Math.random() * 3 + 's';
-        balloon.style.opacity = 1;
-        document.body.appendChild(balloon);
-
-        setTimeout(() => balloon.remove(), 7000);
-      }
-    }
   </script>
 </body>
 </html>
