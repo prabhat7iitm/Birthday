@@ -21,27 +21,33 @@
       text-shadow: 2px 2px 4px #ff4081;
     }
 
-    #cake, #decor, #candles, #balloons {
-      display: none;
-      margin: 20px auto;
+    #stage {
       position: relative;
+      width: 100%;
+      height: 70vh;
     }
 
-    .cake {
+    #cake {
+      display: none;
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cake-body {
       width: 200px;
       height: 120px;
       background: #ffb6c1;
       border-radius: 10px;
-      margin: 0 auto;
       position: relative;
     }
 
-    .cake::before {
-      content: "";
+    .cake-top {
       position: absolute;
       top: -30px;
-      left: 20px;
-      width: 160px;
+      left: 0;
+      width: 200px;
       height: 30px;
       background: #ff69b4;
       border-radius: 10px 10px 0 0;
@@ -62,38 +68,38 @@
     }
 
     .candle {
-      width: 10px;
+      width: 12px;
       height: 40px;
-      background: #fff;
+      background: white;
       position: absolute;
-      top: -40px;
-      left: 95px;
+      top: -70px;
+      left: 94px;
+      border-radius: 2px;
     }
 
     .flame {
       width: 10px;
       height: 15px;
       background: orange;
-      border-radius: 50%;
+      border-radius: 50% 50% 50% 50%;
       position: absolute;
       top: -15px;
-      left: 0;
-      animation: flicker 0.2s infinite alternate;
+      left: 1px;
+      animation: flicker 0.25s infinite alternate;
     }
 
     @keyframes flicker {
       from { transform: scaleY(1); opacity: 0.8; }
-      to { transform: scaleY(1.2); opacity: 1; }
+      to { transform: scaleY(1.3); opacity: 1; }
     }
 
     .balloon {
       width: 50px;
       height: 60px;
-      background: red;
       border-radius: 50%;
       position: absolute;
       bottom: -100px;
-      animation: float 5s ease-in infinite;
+      animation: float 6s ease-in infinite;
     }
 
     @keyframes float {
@@ -138,13 +144,16 @@
 
   <button id="startButton">Click for the Surprise 🎁</button>
 
-  <div id="cake">
-    <div class="cake"></div>
+  <div id="stage">
+    <div id="cake">
+      <div class="cake-body">
+        <div class="cake-top"></div>
+      </div>
+    </div>
+
+    <div id="balloons"></div>
   </div>
 
-  <div id="decor"></div>
-  <div id="candles"></div>
-  <div id="balloons"></div>
   <div id="message">💖 You light up my world, Reshmi 💖</div>
 
   <audio id="music" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0070dbcfb1.mp3?filename=birthday-song-11267.mp3"></audio>
@@ -153,8 +162,7 @@
     let step = 0;
     const button = document.getElementById('startButton');
     const cake = document.getElementById('cake');
-    const decor = document.getElementById('decor');
-    const candles = document.getElementById('candles');
+    const cakeBody = document.querySelector('.cake-body');
     const balloons = document.getElementById('balloons');
     const message = document.getElementById('message');
     const music = document.getElementById('music');
@@ -164,33 +172,38 @@
       if (step === 1) {
         cake.style.display = 'block';
         button.textContent = "Decorate the Cake 🎂";
-      } else if (step === 2) {
-        decor.style.display = 'block';
-        for (let i = 0; i < 10; i++) {
+      } 
+      else if (step === 2) {
+        // add decorations on cake
+        for (let i = 0; i < 12; i++) {
           let d = document.createElement('div');
           d.className = 'decoration';
-          d.style.left = (100 + i*10) + 'px';
-          d.style.top = (200 + Math.random()*30) + 'px';
-          decor.appendChild(d);
+          d.style.left = (10 + i * 15) + 'px';
+          d.style.top = (80 + Math.random() * 20) + 'px';
+          cakeBody.appendChild(d);
         }
-        button.textContent = "Light the Candles 🕯️";
-      } else if (step === 3) {
-        candles.style.display = 'block';
-        let candle = document.createElement('div');
+        button.textContent = "Light the Candle 🕯️";
+      } 
+      else if (step === 3) {
+        // add candle
+        const candle = document.createElement('div');
         candle.className = 'candle';
-        let flame = document.createElement('div');
+        const flame = document.createElement('div');
         flame.className = 'flame';
         candle.appendChild(flame);
-        cake.appendChild(candle);
+        cakeBody.appendChild(candle);
 
+        // create balloons
         for (let i = 0; i < 10; i++) {
           let b = document.createElement('div');
           b.className = 'balloon';
-          b.style.left = (50 * i) + 'px';
-          b.style.background = ['red','blue','yellow','green','pink'][i % 5];
+          b.style.left = (50 * i + 20) + 'px';
+          b.style.background = ['#ff4757','#1e90ff','#ffa502','#2ed573','#eccc68'][i % 5];
+          b.style.animationDelay = (Math.random() * 2) + 's';
           balloons.appendChild(b);
         }
 
+        // play music + show message
         music.play();
         message.style.display = 'block';
         button.textContent = "🎈 Replay Surprise";
