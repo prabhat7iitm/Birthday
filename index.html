@@ -52,12 +52,14 @@
       transform: translateX(-50%);
     }
 
+    /* 🍫 cake color changed */
     .cake-body {
       width: 200px;
       height: 120px;
-      background: #ffb6c1;
+      background: #7b3f00; /* chocolate brown */
       border-radius: 10px;
       position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .cake-top {
@@ -66,14 +68,15 @@
       left: 0;
       width: 200px;
       height: 30px;
-      background: #ff69b4;
+      background: #ff69b4; /* strawberry pink top */
       border-radius: 10px 10px 0 0;
+      box-shadow: inset 0 -5px #ff1493;
     }
 
     .decoration {
       width: 10px;
       height: 10px;
-      background: #fff;
+      background: #ffe4e1;
       border-radius: 50%;
       position: absolute;
       animation: twinkle 1s infinite alternate;
@@ -92,6 +95,7 @@
       top: -70px;
       left: 94px;
       border-radius: 2px;
+      box-shadow: 0 0 5px #ffb6c1;
     }
 
     .flame {
@@ -103,6 +107,7 @@
       top: -15px;
       left: 1px;
       animation: flicker 0.25s infinite alternate;
+      box-shadow: 0 0 10px yellow;
     }
 
     @keyframes flicker {
@@ -206,6 +211,7 @@
           d.className = 'decoration';
           d.style.left = (10 + i * 15) + 'px';
           d.style.top = (80 + Math.random() * 20) + 'px';
+          d.style.background = ['#ffe4e1', '#fffacd', '#add8e6', '#ffb6c1'][i % 4];
           cakeBody.appendChild(d);
         }
         button.textContent = "Light the Candle 🕯️";
